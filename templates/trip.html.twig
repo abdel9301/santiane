@@ -27,9 +27,8 @@
                             {% if step.transport.baggageDrop is defined and step.transport.baggageDrop %}
                                 <p class="card-text">Baggage Drop : {{ step.transport.baggageDrop }}</p>
                             {% endif %}
-                            <p class="card-text"><small class="text-muted">Ligne de texte supplémentaire</small></p>
                         </div>
-                        <div class="card-footer">En-tête de la première carte</div>
+                        <div class="card-footer">Number : {{ step.number }}</div>
                     </div>
                 </div>
             {% endfor %}
@@ -57,9 +56,8 @@
                             {% if step.transport.baggageDrop is defined and step.transport.baggageDrop %}
                                 <p class="card-text">Baggage Drop : {{ step.transport.baggageDrop }}</p>
                             {% endif %}
-                            <p class="card-text"><small class="text-muted">Ligne de texte supplémentaire</small></p>
                         </div>
-                        <div class="card-footer">En-tête de la première carte</div>
+                        <div class="card-footer">Number : {{ step.number }}</div>
                     </div>
                 </div>
             {% endfor %}

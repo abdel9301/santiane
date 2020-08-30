@@ -43,6 +43,11 @@ class Step
      */
     private $trip;
 
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $number;
+
 
     public function getId(): ?int
     {
@@ -93,6 +98,18 @@ class Step
     public function setTrip(?Trip $trip): self
     {
         $this->trip = $trip;
+
+        return $this;
+    }
+
+    public function getNumber(): ?string
+    {
+        return $this->number;
+    }
+
+    public function setNumber(?string $number): self
+    {
+        $this->number = $number;
 
         return $this;
     }
