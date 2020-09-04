@@ -81,31 +81,4 @@ class Trip
 
         return $this;
     }
-
-    /**
-     * @return Collection|Step[]
-     */
-    public function getStepsPossible(): Collection
-    {
-        $collection = new ArrayCollection();
-
-        $steps = $this->steps;
-        foreach ($steps as $step) {
-            $arrival = $step->getArrival()->getId();
-
-            $nextStep = $steps->next();
-            
-            if ($nextStep) {
-                $nextDeparture = $nextStep->getDeparture()->getId();
-            
-                if ($arrival !== $nextDeparture) {
-                    continue;
-                } 
-            }
-
-            $collection->add($step);
-        }
-
-        return $collection;
-    }
 }

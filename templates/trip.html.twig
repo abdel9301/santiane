@@ -4,57 +4,26 @@
 {% block body %}
     <div class="container">
         <div class="row justify-content-center">
-            <h2> Version affichage total avec etape en erreur distingué </h2>
+            <h2> Voyage 1 </h2>
         </div>
         <div class="row">
-            {% for step in stepsTotal %}
-                {% set nextStepExist = nextStepExist(step.arrival.id, step.trip.id) %}
-                {% set bgCard = (nextStepExist is same as (0) and loop.last is same as (false) ) ? 'text-white bg-danger' : '' %}
-                <div class="card-deck p-3">
-                    <div class="card {{ bgCard }}" >
-                        <div class="card-header">
-                            {{ step.departure.name }} -> {{ step.arrival.name }}
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">{{ step.transport }}</h5>
-                            {% if step.transport.seat %}
-                                <p class="card-text">Seat : {{ step.transport.seat }}</p>
-                            {% endif %}
-                            {% if step.transport.gate is defined and step.transport.gate %}
-                                <p class="card-text">Gate : {{ step.transport.gate }}</p>
-                            {% endif %}
-
-                            {% if step.transport.baggageDrop is defined and step.transport.baggageDrop %}
-                                <p class="card-text">Baggage Drop : {{ step.transport.baggageDrop }}</p>
-                            {% endif %}
-                        </div>
-                        <div class="card-footer">Number : {{ step.number }}</div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-
-        <div class="row justify-content-center">
-            <h2> Version affichage sans l'etape en erreur </h2>
-        </div>
-        <div class="row">
-            {% for step in stepsPossible %}
+            {% for step in steps %}
                 <div class="card-deck p-3">
                     <div class="card" >
                         <div class="card-header">
-                            {{ step.departure.name }} -> {{ step.arrival.name }}
+                            {{ step.departure }} -> {{ step.arrival }}
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">{{ step.transport }}</h5>
-                            {% if step.transport.seat %}
-                                <p class="card-text">Seat : {{ step.transport.seat }}</p>
+                            <h3 class="card-title">{{ step.type }}</h3>
+                            {% if step.seat %}
+                                <p class="card-text">Seat : {{ step.seat }}</p>
                             {% endif %}
-                            {% if step.transport.gate is defined and step.transport.gate %}
-                                <p class="card-text">Gate : {{ step.transport.gate }}</p>
+                            {% if step.gate is defined and step.gate %}
+                                <p class="card-text">Gate : {{ step.gate }}</p>
                             {% endif %}
 
-                            {% if step.transport.baggageDrop is defined and step.transport.baggageDrop %}
-                                <p class="card-text">Baggage Drop : {{ step.transport.baggageDrop }}</p>
+                            {% if step.baggageDrop is defined and step.baggageDrop %}
+                                <p class="card-text">Baggage Drop : {{ step.baggageDrop }}</p>
                             {% endif %}
                         </div>
                         <div class="card-footer">Number : {{ step.number }}</div>

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use App\Form\SearchTripType;
 use App\Entity\Step;
 use App\Entity\Trip;
+use App\Service\Steps as ServiceSteps;
 
 
 class HomeController extends AbstractController
@@ -17,42 +18,18 @@ class HomeController extends AbstractController
      */
     public function index(Request $request)
     {
-        $repoTrip = $this->getDoctrine()
-        ->getRepository(Trip::class);
-
-        $trips = $repoTrip->findAll();
-
-        return $this->render('home.html.twig', [
-            'trips' => $trips,
-        ]);
+        return $this->render('home.html.twig');
     }
 
     /**
-     * @Route("/trip/{id}", name="trip")
+     * @Route("/trip/{voyage}", name="trip")
      */
-    public function trip(Request $request, int $id)
+    public function trip(Request $request, string $voyage, ServiceSteps $stepsService)
     {
-        $form = $this->createForm(SearchTripType::class);
-
-        $form->handleRequest($request);
-        $repoStep = $this->getDoctrine()
-        ->getRepository(Trip::class);
-
-        $trip = $repoStep->find($id);
-
-        if (!$trip) {
-
-            $this->addFlash(
-                'danger',
-                'Aucun voyage correspondant'
-            );
-
-            return $this->redirectToRoute('homepage');
-        } 
+        $steps = $stepsService->getSteps('file/'.$voyage.'.json');
 
         return $this->render('trip.html.twig', [
-            'stepsTotal'    => $trip->getSteps(),
-            'stepsPossible' => $trip->getStepsPossible(),
+            'steps'    => $steps,
         ]);
     }
 }
